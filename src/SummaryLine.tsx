@@ -41,13 +41,13 @@ function SummaryLine({category, score}: {category: string, score: number}) {
   }
 
   return (
-    <div className={`flex justify-between text-md p-2 mx-3 ${bgColorClass}`}>
+    <div className={`flex justify-between text-md px-4 py-4 mx-3 my-1 rounded-lg ${bgColorClass}`}>
       <div className={`flex items-center space-x-2`}>
-        <img src={image} alt={category} className={`w-4 h-4 pr-1 ${colorClass}`} />
-        <span className={`text-md ${colorClass}`}>{category}</span>
+        <img src={image} alt={category} className={`w-6 h-6 pr-1 ${colorClass}`} />
+        <span className={`text-md text-base font-semibold ${colorClass}`}>{category}</span>
       </div>
       <div>
-        <span className='text-gray-500 text-xs'>
+        <span className='text-gray-500 text-base'>
           <strong className='font-bold text-gray-900'>{score}</strong> {' / 100'}
         </span>
       </div>
