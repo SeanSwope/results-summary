@@ -8,43 +8,39 @@ import visualImg from './assets/icon-visual.svg'
 // Green teal: hsl(166, 100%, 37%)
 // Cobalt blue: hsl(234, 85%, 45%)
 
-function SummaryLine({category, score}: {category: string, score: number}) {
-  let image;
-  let colorClass;
-  let bgColorClass;
-  
-  switch(category) {
-    case 'Reaction':
-      image = reactionImg;
-      colorClass = 'text-[hsl(0_100%_67%)]';
-      bgColorClass = 'bg-[hsl(0_100%_67%)]/10';
-      break;
-    case 'Memory':
-      image = memoryImg;
-      colorClass = 'text-[hsl(39_100%_56%)]';
-      bgColorClass = 'bg-[hsl(39_100%_56%)]/10';
-      break;
-    case 'Verbal':
-      image = verbalImg;
-      colorClass = 'text-[hsl(166_100%_37%)]';
-      bgColorClass = 'bg-[hsl(166_100%_37%)]/10';
-      break;
-    case 'Visual':
-      image = visualImg;
-      colorClass = 'text-[hsl(234_85%_45%)]';
-      bgColorClass = 'bg-[hsl(234_85%_45%)]/10';
-      break;
-    default:
-      image = memoryImg;
-      colorClass = 'text-[hsl(39_100%_56%)]';
-      bgColorClass = 'bg-[hsl(39_100%_56%)]/10';
-  }
+type Category = 'Reaction' | 'Memory' | 'Verbal' | 'Visual';
+
+const categoryStyles = {
+  Reaction: {
+    image: reactionImg,
+    colorClass: 'text-[hsl(0_100%_67%)]',
+    bgColorClass: 'bg-[hsl(0_100%_67%)]/10',
+  },
+  Memory: {
+    image: memoryImg,
+    colorClass: 'text-[hsl(39_100%_56%)]',
+    bgColorClass: 'bg-[hsl(39_100%_56%)]/10',
+  },
+  Verbal: {
+    image: verbalImg,
+    colorClass: 'text-[hsl(166_100%_37%)]',
+    bgColorClass: 'bg-[hsl(166_100%_37%)]/10',
+  },
+  Visual: {
+    image: visualImg,
+    colorClass: 'text-[hsl(234_85%_45%)]',
+    bgColorClass: 'bg-[hsl(234_85%_45%)]/10',
+  },
+} satisfies Record<Category, { image: string; colorClass: string; bgColorClass: string }>;
+
+function SummaryLine({category, score}: {category: Category, score: number}) {
+  const { image, colorClass, bgColorClass } = categoryStyles[category];
 
   return (
-    <div className={`flex justify-between text-md px-4 py-4 mx-3 my-1 rounded-lg ${bgColorClass}`}>
-      <div className={`flex items-center space-x-2`}>
-        <img src={image} alt={category} className={`w-6 h-6 pr-1 ${colorClass}`} />
-        <span className={`text-md text-base font-semibold ${colorClass}`}>{category}</span>
+    <div className={`flex justify-between items-center text-md px-4 py-4 mx-3 my-1 rounded-lg ${bgColorClass}`}>
+      <div className='flex items-center space-x-2'>
+        <img src={image} alt="" className='w-6 h-6 pr-1' />
+        <span className={`text-base font-semibold ${colorClass}`}>{category}</span>
       </div>
       <div>
         <span className='text-gray-500 text-base'>
